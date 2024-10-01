@@ -2,7 +2,7 @@
 #include <filesystem>
 #include <inja/inja.hpp>
 #include <fstream>
-#include "db.h"
+#include "../db.h"
 #include <iostream>
 
 std::string repgen::generateAnomaliesSummary(std::string dbFile)
