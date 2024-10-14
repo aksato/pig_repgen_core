@@ -4,7 +4,7 @@ project(pig_repgen LANGUAGES CXX)
 # Find required dependencies
 find_package(inja CONFIG REQUIRED)
 find_package(SQLiteCpp CONFIG REQUIRED)
-
+find_package(CLI11)
 
 # Add the pig_repgen_core library
 add_library(pig_repgen_core STATIC
@@ -16,13 +16,6 @@ add_library(pig_repgen_core STATIC
 target_link_libraries(pig_repgen_core PRIVATE pantor::inja SQLiteCpp)
 target_compile_features(pig_repgen_core PRIVATE cxx_std_17)
 
-# Add the executable
-add_executable(pig_repgen main.cpp)
-
-# Link the core library with the executable
-target_link_libraries(pig_repgen PRIVATE pig_repgen_core)
-target_compile_features(pig_repgen PRIVATE cxx_std_17)
-
 # Config install directory
 set(INSTALL_DIR "$<CONFIG>")
 
@@ -32,3 +25,12 @@ install(FILES repgen/repgen.h DESTINATION "${CMAKE_INSTALL_PREFIX}/${INSTALL_DIR
 
 # Install the executable
 install(TARGETS pig_repgen_core DESTINATION "${CMAKE_INSTALL_PREFIX}/${INSTALL_DIR}/lib")
+
+if(CLI11_FOUND)
+    # Add the executable
+    add_executable(pig_repgen main.cpp)
+
+    # Link the core library with the executable
+    target_link_libraries(pig_repgen PRIVATE pig_repgen_core CLI11::CLI11)
+    target_compile_features(pig_repgen PRIVATE cxx_std_17)
+endif()

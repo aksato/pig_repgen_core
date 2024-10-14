@@ -8,6 +8,8 @@ class MesonQtInjaConan(ConanFile):
     def requirements(self):
         self.requires("inja/3.4.0")
         self.requires("sqlitecpp/3.3.2")
+        self.requires("cli11/2.4.2")
+
 
     def layout(self):
         cmake_layout(self)
