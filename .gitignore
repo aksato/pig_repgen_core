@@ -1,3 +1,5 @@
 meson.build.user
 .vscode
 build/
+CMakeUserPresets.json
+*.sqlite
